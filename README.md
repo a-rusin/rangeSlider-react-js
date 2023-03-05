@@ -1,12 +1,46 @@
-# Getting Started with Create React App
+# RangeSlider React JavaScript component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## _Tesk task for Neo Stack Technology company ([NST](https://www.neostk.com/))_
+
+Hello!\
+This is my test task for NST company: customizable range slider component (widget) for JavaScript with no external dependencies.\
+**Warning!** In fact, this is a complete copy of my previously written component on Vanilla JS ([link to the project on GitHub](https://github.com/a-rusin/rangeSlider-vanilla-JS)), but here I decided to rewrite the component on React.\
+The slider works as follows. To begin with, the user selects the year range (year switcher), then during the transition to the month section (month switcher), the slider remembers the current values of the minimum and maximum slider dipozone, and accepts them for the second slider (by month) for the minimum and maximum values, respectively. In the second slider, a more precise slider setting is selected (a more accurate date range).
+
+## Features
+
+-   React!
+-   No dependencies!
+-   Totally responsive!
+-   Control over minDate, maxDate and current date values!
+-   CSS Customization
+-   Simple API to interact with the value!
+-   Unlimited use of the slider on the page
+
+## Tested in:
+
+-   Chrome 110
+
+Should also work in all major browsers, but need to test.
+
+## Example
+
+![Example picture 1](https://i.ibb.co/PDnrMnY/example-img1.jpg)\
+![Example picture 2](https://i.ibb.co/23w4S3T/example-img2.jpg)
+
+An example of default initialization:
+
+```javascript
+<div className="wrapper">
+    <RangeSlider minDate="2014" maxDate="2021" minSelectedDate="0-2015" maxSelectedDate="0-2016" />
+</div>
+```
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+`npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -14,12 +48,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
+`npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -29,42 +58,55 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Simple download
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Download the files and move them to a folder in your project.\
+For example:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```javascript
+<div className="wrapper">
+    <RangeSlider minDate="2014" maxDate="2021" minSelectedDate="0-2015" maxSelectedDate="0-2016" />
+</div>
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Props
 
-## Learn More
+##### minDate
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Type: `string`\
+Required field. Minimum value of the year
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+##### maxDate
 
-### Code Splitting
+Type: `string`\
+Required field. Maximum value of the year
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+##### minSelectedDate
 
-### Analyzing the Bundle Size
+Type: `string`\
+Required field. A mark for the minimum selected start date, as well as a mark for the minimum value of the tooltip. It must be entered in the format 'month-year'. **Important!** The month index starts from 0, where 0 is January, 11 is December. For example '01-2021' (you can remove the first zero) - February 2021
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+##### maxSelectedDate
 
-### Making a Progressive Web App
+Type: `string`\
+By analogy with minSelectedDate, only the maximum selected date.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## CSS customization
 
-### Advanced Configuration
+This component has the ability to customize the slider for your needs. To do this, go to the `range-slider.css` file and change the CSS variable settings for yourself at the beginning of the styles.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+-   `--color-primary` - color of link (switchers), tooltips text
+-   `--color-secondary` - color of progress, slider thumb
+-   `--color-tooltip-bg` - background color tooltips
+-   `--color-ruler1` - color of rules text 1 (light)
+-   `--color-ruler2` - color of rules text 2 (dark)
+-   `--color-slider-bg` - background color slider
 
-### Deployment
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+MIT
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Free Software, Hell Yeah!**\
+Alexandr Rusin, 2023 (c)
