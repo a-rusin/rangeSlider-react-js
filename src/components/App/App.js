@@ -5,7 +5,7 @@ function App() {
         <main>
             <section>
                 <div className="wrapper">
-                    <RangeSlider minDate="2014" maxDate="2021" minSelectedDate="05-2015" maxSelectedDate="06-2016" />
+                    <RangeSlider minDate="2010" maxDate="2020" minSelectedDate="05-2015" maxSelectedDate="06-2016" />
                 </div>
             </section>
         </main>

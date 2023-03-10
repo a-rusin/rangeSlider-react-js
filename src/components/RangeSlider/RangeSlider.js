@@ -9,9 +9,10 @@ const RangeSlider = (props) => {
 
     const [maxSelectedDate, setMaxSelectedDate] = useState(+props.maxSelectedDate.split("-")[1] + (1 / 12) * props.maxSelectedDate.split("-")[0]);
 
-    const [swicthMode, setSwicthMode] = useState("years");
+    const [switchMode, setswitchMode] = useState("years");
 
     const activeClassSwitcher = "active";
+    const rotateClass = "rotate";
 
     let step = 20 / (maxDate - minDate);
     let compensetionLeft = 40 + step * (minSelectedDate - minDate);
@@ -21,14 +22,14 @@ const RangeSlider = (props) => {
     const rangeSliderInputMax = "rangeSlider-input-max";
 
     useEffect(() => {
-        if (swicthMode === "years") {
+        if (switchMode === "years") {
             setMinDate(props.minDate);
             setMaxDate(props.maxDate);
-        } else if (swicthMode === "month") {
+        } else if (switchMode === "month") {
             setMinDate(parseInt(minSelectedDate));
             setMaxDate(Math.ceil(maxSelectedDate));
         }
-    }, [swicthMode]);
+    }, [switchMode]);
 
     const monthes = ["фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
 
@@ -52,18 +53,18 @@ const RangeSlider = (props) => {
     const onChangeSelectedDate = (name, value) => {
         switch (name) {
             case rangeSliderInputMin:
-                if (maxSelectedDate - value <= 1 && swicthMode === "years") {
+                if (maxSelectedDate - value <= 1 && switchMode === "years") {
                     setMinSelectedDate(maxSelectedDate - 1);
-                } else if (maxSelectedDate - value <= rangeStep && swicthMode === "month") {
+                } else if (maxSelectedDate - value <= rangeStep && switchMode === "month") {
                     setMinSelectedDate(maxSelectedDate - rangeStep);
                 } else {
                     setMinSelectedDate(value);
                 }
                 break;
             case rangeSliderInputMax:
-                if (value - minSelectedDate <= 1 && swicthMode === "years") {
+                if (value - minSelectedDate <= 1 && switchMode === "years") {
                     setMaxSelectedDate(+minSelectedDate + 1);
-                } else if (value - minSelectedDate <= rangeStep && swicthMode === "month") {
+                } else if (value - minSelectedDate <= rangeStep && switchMode === "month") {
                     setMaxSelectedDate(+minSelectedDate + rangeStep);
                 } else {
                     setMaxSelectedDate(value);
@@ -76,7 +77,7 @@ const RangeSlider = (props) => {
 
     const onChangeSwitchMode = (e) => {
         e.preventDefault();
-        setSwicthMode(e.target.getAttribute("data-switchers"));
+        setswitchMode(e.target.getAttribute("data-switchers"));
     };
 
     const ruleRender = (maxDate, minDate) => {
@@ -85,26 +86,26 @@ const RangeSlider = (props) => {
         let currentDifMaxMinYear = maxDate - minDate;
         let step = 100 / currentDifMaxMinYear;
 
-        if (swicthMode === "years") {
+        if (switchMode === "years") {
             for (let i = 0; i <= currentDifMaxMinYear; i++) {
                 let styleYears = {
                     left: `${step * i}%`,
                     transform: `translateX(-${step * i}%)`,
                 };
                 htmlRuler.push(
-                    <li key={i} className="rangeSlider-years-item" style={styleYears}>
+                    <li key={i} className={"rangeSlider-years-item " + getRotateClass(currentDifMaxMinYear, 20)} style={styleYears}>
                         {minDate + i}
                     </li>
                 );
             }
-        } else if (swicthMode === "month") {
+        } else if (switchMode === "month") {
             for (let i = 0; i <= currentDifMaxMinYear; i++) {
                 let styleYears = {
                     left: `${step * i}%`,
                     transform: `translateX(-${step * i}%)`,
                 };
                 htmlRuler.push(
-                    <li key={i} className="rangeSlider-years-item rangeSlider-years-item-black" style={styleYears}>
+                    <li key={i} className={"rangeSlider-years-item rangeSlider-years-item-black " + getRotateClass(currentDifMaxMinYear, 3)} style={styleYears}>
                         {minDate + i}
                     </li>
                 );
@@ -116,7 +117,7 @@ const RangeSlider = (props) => {
                             transform: `translateX(-${monthPos}%)`,
                         };
                         htmlRuler.push(
-                            <li key={month + i} className="rangeSlider-years-item" style={styleMonthes}>
+                            <li key={month + i} className={"rangeSlider-years-item " + getRotateClass(currentDifMaxMinYear, 3)} style={styleMonthes}>
                                 {month}
                             </li>
                         );
@@ -128,13 +129,21 @@ const RangeSlider = (props) => {
         return htmlRuler;
     };
 
+    const getRotateClass = (difYears, value) => {
+        return `${difYears >= value ? rotateClass : ""}`;
+    };
+
+    const getActiveClass = (mode) => {
+        return `${switchMode === mode ? activeClassSwitcher : ""}`;
+    };
+
     return (
         <div className="rangeSlider-container">
             <div className="rangeSlider-switcher">
-                <button data-switchers="years" className={swicthMode === "years" ? `rangeSlider-btn ${activeClassSwitcher}` : "rangeSlider-btn"} onClick={(e) => onChangeSwitchMode(e)}>
+                <button data-switchers="years" className={"rangeSlider-btn " + getActiveClass("years")} onClick={(e) => onChangeSwitchMode(e)}>
                     Все года
                 </button>
-                <button data-switchers="month" className={swicthMode === "month" ? `rangeSlider-btn ${activeClassSwitcher}` : "rangeSlider-btn"} onClick={(e) => onChangeSwitchMode(e)}>
+                <button data-switchers="month" className={"rangeSlider-btn " + getActiveClass("month")} onClick={(e) => onChangeSwitchMode(e)}>
                     Месяца
                 </button>
             </div>
